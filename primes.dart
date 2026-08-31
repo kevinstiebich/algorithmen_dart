@@ -14,15 +14,17 @@ void main() {
 List<int> findPrimes(number) {
   var primes = <int>[];
 
-  for (var i = 2; i <= number; i++) {
-    for (var j = 2; j <= i; j++) {
-      if (i % j == 0 && i > 2) {
-        break;
-      } else if (j == i - 1 || i == 2) {
-        primes.add(i);
-        break;
-      }
+  if (number > 1) primes.add(2);
+
+  for (var i = 3; i <= number; i += 2) {
+    bool isPrime = true;
+
+    for (var prime in primes) {
+      if (prime * prime > i) break;
+      if (i % prime == 0) isPrime = false;
     }
+
+    if (isPrime) primes.add(i);
   }
 
   return primes;
