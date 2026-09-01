@@ -1,6 +1,10 @@
 import "dart:io";
 
 void main() {
+  print(findPrimes(getInput()));
+}
+
+int getInput() {
   int? number;
 
   do {
@@ -8,7 +12,7 @@ void main() {
     number = int.tryParse(stdin.readLineSync()!);
   } while (number == null);
 
-  print(findPrimes(number));
+  return number;
 }
 
 List<int> findPrimes(number) {
