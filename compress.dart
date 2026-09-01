@@ -5,7 +5,32 @@ void main(List<String> args) {
   compressAndPrint(toCompress);
 }
 
-void compressAndPrint(toCompress) {
+void compressAndPrint(String toCompress) {
+  var charCounter = 1;
+  var i = 1;
+  String result = "";
+
+  while (i <= toCompress.length) {
+    if (i < toCompress.length && toCompress[i - 1] == toCompress[i]) {
+      charCounter++;
+      i++;
+      continue;
+    }
+
+    result += switch (charCounter) {
+      1 => toCompress[i - 1],
+      2 => toCompress[i - 1] + toCompress[i - 1],
+      _ => toCompress[i - 1] + charCounter.toString(),
+    };
+
+    charCounter = 1;
+    i++;
+  }
+
+  print("$result");
+}
+
+/* void compressAndPrint(toCompress) {
   List<String> singleChars = toCompress.split("");
   var charCounter = 1;
   var i = 1;
@@ -28,11 +53,11 @@ void compressAndPrint(toCompress) {
 
   toCompress = singleChars.join("");
   print("$toCompress");
-}
+} */
 
 String getValidFormat(List<String> args) {
   String toCompress;
-  
+
   if (args.isEmpty) {
     print("Eingabe: ");
     toCompress = stdin.readLineSync()!;
